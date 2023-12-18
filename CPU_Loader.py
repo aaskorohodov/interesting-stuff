@@ -15,7 +15,7 @@ if __name__ == "__main__":
     # Get the number of CPU cores available
     num_cores = multiprocessing.cpu_count()
 
-    # Indicate how much cores should be loaded
+    # Indicate how many cores should be loaded
     load_this_number_of_cores = num_cores - 3
 
     # Create a process for each CPU core
