@@ -59,7 +59,7 @@ def get_remaining_closed_doors_with_goats(choice: int, doors: list[str]) -> list
         choice: Original choice
         doors: All doors
     Returns:
-        List[representing doors with goats, that player did not initially selected]"""
+        List[representing doors with goats, that player did not initially select]"""
 
     closed_doors = []
     for i in range(3):
