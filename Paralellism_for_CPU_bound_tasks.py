@@ -37,14 +37,14 @@ def cpu_bound_task(data_segment: list[list[int]]) -> str:
 
 # NOT CPU-bound function (relatively light function)
 def not_to_much_cpu_bounded_task(data_segment: list[list[int]]) -> str:
-    """Simulate some light calculations, bot to much CPU-bounded
+    """Simulate some light calculations, bot too much CPU-bounded
 
     Args:
         data_segment: Some imaginary data
     Returns:
         Some imaginary result"""
 
-    for _ in range(1_000_000):  # <- Not too much operations
+    for _ in range(1_000_000):  # <- Not too many operations
         pass
     return f"Processed segment: {data_segment}"
 
