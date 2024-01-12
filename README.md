@@ -4,7 +4,7 @@
 
 # What is this?
 
-This holds different interesting things, relate to python. Mostly problem-solving
+This holds different interesting things, related to Python. Mostly problem-solving
 stuff.
 
 ## What do we have here...
