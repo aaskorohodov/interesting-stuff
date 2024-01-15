@@ -1,8 +1,22 @@
+"""
+Straight-froward way to figure out if a number is prime – simply divide it by everything from 2 to the half of it
+(it can not be divided without remained for something, that is larger than half of initial number).
+"""
+
+
 import time
 
 
 def is_prime(initial_number: int) -> bool:
-    if initial_number <= 1:
+    """Checks is given number is a prime
+
+    Args:
+        initial_number: Your number to check
+    Returns:
+        True if provided number is prime, False otherwise."""
+
+    # Base cases
+    if initial_number <= 2:
         return False
 
     for numb in range(2, int(initial_number**0.5) + 1):
@@ -10,6 +24,7 @@ def is_prime(initial_number: int) -> bool:
             if numb != initial_number:
                 return False
 
+        # In case there are a lot of iterations – printing current progress from time to time
         if not numb % 100_000_0:
             print(f'Current iteration {numb}\n'
                   f'Overall iteration {int(initial_number**0.5)}')
@@ -31,14 +46,10 @@ all_good = []
 for n in prime_numbers:
     all_good.append(is_prime(n))
 
-print(all(all_good))
-all_good_too = []
 for n in not_prime_numbers:
-    all_good_too.append(is_prime(n) is False)
+    all_good.append(is_prime(n) is False)
 
-print(all(all_good_too))
+print(all(all_good))
 start_time = time.perf_counter()
 print(is_prime(9223372036854775783))
 print(time.perf_counter() - start_time)
-
-# print(is_prime(170141183460469231731687303715884105727))
