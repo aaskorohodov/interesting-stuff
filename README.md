@@ -1,7 +1,3 @@
-
-
-
-
 # What is this?
 
 This holds different interesting things, related to Python. Mostly problem-solving
@@ -17,3 +13,4 @@ stuff.
 - [A real illustration to Monty Hall Problem](./Monty_Hall_Problem.py)
 - [How to move some values to the end of the list](./Move_Values_Permutations.py)
 - [Does multiprocessing faster and when?](./Paralellism_for_CPU_bound_tasks.py)
+- [Quests, created (but not solved) with ChatGPT](./ChatGPT_Challenges/README.md)
