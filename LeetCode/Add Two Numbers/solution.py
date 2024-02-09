@@ -107,6 +107,12 @@ expected = [0, 1, 1]
 actual = add_two_numbers_from_reversed_list(l1, l2)
 assert expected == actual
 
+l1 = [7]
+l2 = [8]
+expected = [5, 1]
+actual = add_two_numbers_from_reversed_list(l1, l2)
+assert expected == actual
+
 l1 = [9, 9, 9, 9, 9, 9, 9]
 l2 = [9, 9, 9, 9]
 expected = [8, 9, 9, 9, 0, 0, 0, 1]
