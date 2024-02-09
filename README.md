@@ -14,3 +14,4 @@ stuff.
 - [How to move some values to the end of the list](./Move_Values_Permutations.py)
 - [Does multiprocessing faster and when?](./Paralellism_for_CPU_bound_tasks.py)
 - [Quests, created (but not solved) with ChatGPT](./ChatGPT_Challenges/README.md)
+- [Quests from LeetCode](./LeetCode/README.md)
