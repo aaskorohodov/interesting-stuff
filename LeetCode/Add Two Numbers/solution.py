@@ -26,7 +26,7 @@ class ReversedListIterator:
             Last number from self._reversed_list"""
 
         if self._reversed_list:
-            return self._reversed_list.pop()
+            return self._reversed_list.pop(0)
         else:
             raise StopIteration
 
@@ -98,6 +98,12 @@ assert expected == actual
 l1 = [0]
 l2 = [0]
 expected = [0]
+actual = add_two_numbers_from_reversed_list(l1, l2)
+assert expected == actual
+
+l1 = [0, 0, 1]
+l2 = [0, 1]
+expected = [0, 1, 1]
 actual = add_two_numbers_from_reversed_list(l1, l2)
 assert expected == actual
 
