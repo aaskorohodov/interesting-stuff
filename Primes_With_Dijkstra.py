@@ -1,56 +1,120 @@
-class PrimeWithMultiple:
-    def __init__(self, prime: int):
-        self.prime: int = prime
-        self.multiple: int = prime * prime
+"""
+This code illustrates Dijkstra's approach to gather prime-numbers from 2 to some specific number (or to determine if
+a given number is prime). The algorithm itself can be seen here: https://www.youtube.com/watch?v=fwxjMKBMR7s
 
-    def update_multiple(self) -> None:
-        self.multiple += self.prime
-
-    def __repr__(self):
-        return f'{self.prime} ({self.multiple})'
-
-    def __str__(self):
-        return f'{self.prime} ({self.multiple})'
+Its implementations rely on heapq, which can create a heap from any list. This heap is a binary tree, in which we are
+only interested in one of its properties - this tree has the lowest element on its top.
+"""
 
 
-def is_prime(number: int) -> bool:
-    if number == 1:
-        return False
-    if number == 2:
-        return True
+import heapq
 
-    number_two_is_prime = PrimeWithMultiple(2)
-    primes_with_multiples = [number_two_is_prime]
-    primes = {2, }
 
-    for i in range(3, number + 1):
-        smallest_multiples = []
-        for prime in primes_with_multiples:
-            if not smallest_multiples:
-                smallest_multiples.append(prime)
-                continue
+class PrimeManager:
+    """
+    Attributes:
+        primes_and_their_multiples_pool: list[tuple[prime_multiple, prime]]
+        primes: list[prime, prime, prime, ...]
+    """
 
-            currently_smallest_multiple_prime = smallest_multiples[0]
-            if currently_smallest_multiple_prime.multiple > prime.multiple:
-                smallest_multiples = [prime]
-            elif currently_smallest_multiple_prime.multiple == prime.multiple:
-                smallest_multiples.append(prime)
+    def __init__(self):
+        self.primes_and_their_multiples_pool: list[tuple[int, int]] = []
+        self.primes: list[int] = []
 
-        if i < smallest_multiples[0].multiple:
-            this_is_prime = PrimeWithMultiple(i)
-            primes_with_multiples.append(this_is_prime)
-            primes.add(i)
-            continue
+    def is_this_number_prime(self, given_number: int) -> None:
+        """Determines if the given number is prime
+
+        Args:
+            given_number: Number to check if it's prime
+        Returns:
+            True if given_number is prime"""
+
+        if given_number < 2:
+            self._print_result(given_number)
+            return
+
+        self.primes_and_their_multiples_pool = [(4, 2)]  # Initial pool (multiple and prime); multiple = prime *squared
+        heapq.heapify(self.primes_and_their_multiples_pool)
+        self.primes = [2]
+
+        # As we already created case for 2 (2 is prime) => starting from 3
+        for number in range(3, given_number + 1):
+
+            # 'number' is not prime => increasing smallest multiple, till it gets to number or higher
+            while self._get_smallest_multiple() < number:
+                self._increase_smallest_multiple()
+
+            # Increasing smallest multiple, but only once! Due to the logic of Dijkstra's itself
+            if self._get_smallest_multiple() == number:
+                self._increase_smallest_multiple()
+
+            else:
+                self._add_new_prime(number)
+
+        self._print_heap_structure(self.primes_and_their_multiples_pool)
+        self._print_result(given_number)
+
+    def _increase_smallest_multiple(self):
+        """Increases smallest multiply by adding its prime to it"""
+
+        multiple, prime = heapq.heappop(self.primes_and_their_multiples_pool)
+        heapq.heappush(self.primes_and_their_multiples_pool, (multiple + prime, prime))
+
+    def _add_new_prime(self, new_prime: int) -> None:
+        """Adds new prime into
+
+        Args:
+            new_prime: New prime to add"""
+
+        self.primes.append(new_prime)
+
+        primes_multiple = new_prime * new_prime
+        heapq.heappush(self.primes_and_their_multiples_pool, (primes_multiple, new_prime))
+
+    def _get_smallest_multiple(self) -> int:
+        """Returns smallest multiple
+
+        Notes:
+            As self.primes_and_their_multiples_pool is a heapq – smallest multiple is always at index 0. This heap
+            automatically sorts its structure, each time new element is added or removed."""
+
+        return self.primes_and_their_multiples_pool[0][0]
+
+    # Prints
+
+    def _print_result(self, given_number: int) -> None:
+        """Prints result
+
+        Args:
+            given_number: Initially provided number, which was tested"""
+
+        if given_number in self.primes:
+            print(f'{given_number} is prime')
         else:
-            for smallest_multiple_prime in smallest_multiples:
-                smallest_multiple_prime.update_multiple()
+            print(f'{given_number} is NOT prime')
 
-        if not (i % 1_000):
-            print(i)
+    def _print_heap_structure(self, heap: list) -> None:
+        """Prints heap's structure, to better understand it visually
 
-    if number in primes:
-        return True
+        Args:
+            heap: List, converted to heap"""
+
+        print('--------- Heap structure ---------')
+        self._print_levels_recursively(0, 0, heap)
+        print('--------- Heap structure ends ---------\n')
+
+    def _print_levels_recursively(self, node_index: int, level: int, heap: list) -> None:
+        """Recursively prints each level of the heap
+
+        Args:
+            node_index: Index of the current node
+            level: Current level (heap is a tree, so this is a tree level)
+            heap: Heap itself"""
+
+        if node_index < len(heap):
+            self._print_levels_recursively(2 * node_index + 2, level + 1, heap)
+            print("   " * level + str(heap[node_index]))
+            self._print_levels_recursively(2 * node_index + 1, level + 1, heap)
 
 
-is_this_number_prime = 1_000_000
-is_prime(is_this_number_prime)
+PrimeManager().is_this_number_prime(28)
