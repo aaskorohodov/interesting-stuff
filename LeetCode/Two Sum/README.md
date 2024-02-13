@@ -1,5 +1,8 @@
 # Two Sum
 
+<img src="../../docs/media/difficulty_low.png" height="20">
+
+
 Given an array of integers <code>nums</code> and an <code>integer</code> target, return indices of the two numbers 
 such that they add up to <code>target</code>.
 

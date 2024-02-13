@@ -1,8 +1,9 @@
 # Longest Substring Without Repeating Characters
 
+<img src="../../docs/media/difficulty_mid.png" height="20">
+
 Given a string, find the length of the longest substring without repeating characters.
 
- 
 
 ### Example 1:
 
