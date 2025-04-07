@@ -1,5 +1,5 @@
-import multiprocessing
 import time
+import multiprocessing
 
 
 def load_cpu() -> None:
