@@ -17,7 +17,7 @@ def run_for_duration(duration: int) -> None:
 
     start_time = time.time()
     num_cores = multiprocessing.cpu_count()
-    load_this_number_of_cores = num_cores - 3
+    load_this_number_of_cores = num_cores - 4
     processes = []
 
     # Create a process for each CPU core

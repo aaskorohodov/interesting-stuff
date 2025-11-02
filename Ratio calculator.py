@@ -28,7 +28,7 @@ class RatioCalculator:
 
 
 # Example usage
-total_volume_ml = 120  # Desired total volume
+total_volume_ml = 300  # Desired total volume
 vg_ratio = 70  # VG percentage
 pg_ratio = 30  # PG percentage
 vg_density = 1.26  # Example density of VG in g/ml

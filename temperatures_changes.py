@@ -37,7 +37,7 @@ plt.grid(True)
 # Show the plot
 plt.show()
 
-#Analyze the data
+# Analyze the data
 for i, diff in enumerate(temp_diffs):
     month = i + 1
     if diff > 0:
